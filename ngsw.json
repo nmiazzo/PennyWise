@@ -1,0 +1,115 @@
+{
+  "configVersion": 1,
+  "timestamp": 1771847325196,
+  "index": "/PennyWise/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/PennyWise/chunk-4M3B4P7J.js",
+        "/PennyWise/chunk-7GC3BAAQ.js",
+        "/PennyWise/chunk-7KY54RXU.js",
+        "/PennyWise/chunk-BAZJBN6X.js",
+        "/PennyWise/chunk-CZSGPQFT.js",
+        "/PennyWise/chunk-DCY57EI2.js",
+        "/PennyWise/chunk-DPOEUPYJ.js",
+        "/PennyWise/chunk-FJULVGZ5.js",
+        "/PennyWise/chunk-H53IAIFB.js",
+        "/PennyWise/chunk-KTYCPJAO.js",
+        "/PennyWise/chunk-OPFW4CZZ.js",
+        "/PennyWise/chunk-RCNJYKON.js",
+        "/PennyWise/chunk-S6TQN5V4.js",
+        "/PennyWise/chunk-SIS6YOJI.js",
+        "/PennyWise/chunk-SNEV3XM5.js",
+        "/PennyWise/chunk-TFOK2HCO.js",
+        "/PennyWise/chunk-U2MXLZLO.js",
+        "/PennyWise/chunk-V4R3QUZD.js",
+        "/PennyWise/chunk-ZOF3TQ34.js",
+        "/PennyWise/favicon.ico",
+        "/PennyWise/index.html",
+        "/PennyWise/main-MVL653FG.js",
+        "/PennyWise/manifest.webmanifest",
+        "/PennyWise/styles-OPB7VIX4.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/PennyWise/icons/icon-128x128.png",
+        "/PennyWise/icons/icon-144x144.png",
+        "/PennyWise/icons/icon-152x152.png",
+        "/PennyWise/icons/icon-192x192.png",
+        "/PennyWise/icons/icon-384x384.png",
+        "/PennyWise/icons/icon-512x512.png",
+        "/PennyWise/icons/icon-72x72.png",
+        "/PennyWise/icons/icon-96x96.png"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/PennyWise/chunk-4M3B4P7J.js": "0ee880df86c493f5ca2446fe8f810987fc0f03e5",
+    "/PennyWise/chunk-7GC3BAAQ.js": "e7a2f9105aef2888381ab3356536b7d9f9542c6a",
+    "/PennyWise/chunk-7KY54RXU.js": "c55283e4d91bbda2e4bae0aee3bd83881e8d1360",
+    "/PennyWise/chunk-BAZJBN6X.js": "bbf6491ccf02af2a53b5dfd80e292c3c3080693f",
+    "/PennyWise/chunk-CZSGPQFT.js": "dda69803a86538676fef5579151957f7d3bc85c0",
+    "/PennyWise/chunk-DCY57EI2.js": "98123652b49269f44db34e42d95207fe9825baef",
+    "/PennyWise/chunk-DPOEUPYJ.js": "4aa7bae97eafddbc149ebd6de2a916cab751a596",
+    "/PennyWise/chunk-FJULVGZ5.js": "c60fbab14da0a49574849cdf489e99ecb5155d0c",
+    "/PennyWise/chunk-H53IAIFB.js": "454b6bf539dcde62d5fb533cc92c6a3d5235fa7f",
+    "/PennyWise/chunk-KTYCPJAO.js": "607cceb6d3ef57798ec62e94fa943e6f065b5b7d",
+    "/PennyWise/chunk-OPFW4CZZ.js": "0b66178de8ff0e3f7a3f3cc57b87b19c07d48a84",
+    "/PennyWise/chunk-RCNJYKON.js": "96d288f1bbfd9fd1609e2b6ad79574103466edb7",
+    "/PennyWise/chunk-S6TQN5V4.js": "ed1822e82256aca65fd67a00c3da7037cdc54f66",
+    "/PennyWise/chunk-SIS6YOJI.js": "755f2237544d094b5444af4422d8113197381cfd",
+    "/PennyWise/chunk-SNEV3XM5.js": "e23069cec91394db0649c3c6b6367074c3ea5aae",
+    "/PennyWise/chunk-TFOK2HCO.js": "3c8ce7552c87b3de3263ab314ec2c5b87b893576",
+    "/PennyWise/chunk-U2MXLZLO.js": "6603a58f29131fd932a67842464769bc6dffb95b",
+    "/PennyWise/chunk-V4R3QUZD.js": "34d4abf32de2460ed101eaa098bea50621d0c3f5",
+    "/PennyWise/chunk-ZOF3TQ34.js": "7349cea7f30f43214fbf7b02e32e18808e70aa56",
+    "/PennyWise/favicon.ico": "9c39f434fe1261f68c5e3eefdf734630d99c5670",
+    "/PennyWise/icons/icon-128x128.png": "f912963bdc6d5a38d8f1dd0afbaab2ce8d657acb",
+    "/PennyWise/icons/icon-144x144.png": "b155fd5f2fd5d2ea7760721063003c4cd95fd783",
+    "/PennyWise/icons/icon-152x152.png": "eae6e0f0c8afb8aaae339e2a569b43e9238e5e6c",
+    "/PennyWise/icons/icon-192x192.png": "15c4180454633880d98674aa7394656196c91584",
+    "/PennyWise/icons/icon-384x384.png": "94a915751ef6c9282df9aea405ad679230631814",
+    "/PennyWise/icons/icon-512x512.png": "1de182f76f7329dfa8f9fcdd1fdcdd695bea6a99",
+    "/PennyWise/icons/icon-72x72.png": "aa88a6096bd973be7f6d7a5489bfa6bc2463f8c4",
+    "/PennyWise/icons/icon-96x96.png": "7fb8f59c30ce2ff12c700321a0b39e14b3dc8f95",
+    "/PennyWise/index.html": "d122755bad4135d4810b33a373d80270e5ff9a1f",
+    "/PennyWise/main-MVL653FG.js": "84ab5cb5c098ef51b06bf61e13e6c7292a0d8a38",
+    "/PennyWise/manifest.webmanifest": "e4b428ae09f01193338a1240899e5b7d64274ac5",
+    "/PennyWise/styles-OPB7VIX4.css": "b1b8d0863cb139ebc199c2c015c17140042fd98d"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}
