@@ -9,6 +9,20 @@
   flex-shrink: 0;
 }
 
+.brand-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  pw-brand-autocomplete {
+    flex: 1;
+  }
+}
+
+.clear-brand-btn {
+  flex-shrink: 0;
+}
+
 .scanner-viewport {
   position: relative;
   flex: 1;

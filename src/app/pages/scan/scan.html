@@ -1,9 +1,23 @@
 <div class="scan-page">
   <div class="brand-selector page-content">
-    <pw-brand-autocomplete
-      label="Shopping at..."
-      (brandSelected)="onBrandPreSelected($event)"
-    />
+    <div class="brand-row">
+      <pw-brand-autocomplete
+        #brandInput
+        label="Shopping at..."
+        [initialValue]="selectedBrand()"
+        (brandSelected)="onBrandPreSelected($event)"
+      />
+      @if (selectedBrand()) {
+        <button
+          mat-icon-button
+          class="clear-brand-btn"
+          (click)="clearBrand()"
+          aria-label="Clear brand"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      }
+    </div>
   </div>
 
   <div class="scanner-viewport" [class.hidden]="scannedProduct() !== null">

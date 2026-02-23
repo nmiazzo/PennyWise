@@ -41,8 +41,9 @@ export class Scan implements AfterViewInit, OnDestroy {
   private snackBar = inject(MatSnackBar);
 
   @ViewChild('scannerTarget') scannerTarget!: ElementRef<HTMLDivElement>;
+  @ViewChild('brandInput') brandInput!: BrandAutocomplete;
 
-  readonly selectedBrand = signal<string>('');
+  readonly selectedBrand = signal<string>(this.storage.selectedBrand());
   readonly scannerActive = signal<boolean>(false);
   readonly scannerError = signal<string | null>(null);
   readonly scannedProduct = signal<Product | null>(null);
@@ -104,6 +105,17 @@ export class Scan implements AfterViewInit, OnDestroy {
 
   onBrandPreSelected(brand: string): void {
     this.selectedBrand.set(brand);
+    if (brand) {
+      this.storage.setSelectedBrand(brand);
+    } else {
+      this.storage.clearSelectedBrand();
+    }
+  }
+
+  clearBrand(): void {
+    this.selectedBrand.set('');
+    this.storage.clearSelectedBrand();
+    this.brandInput.clear();
   }
 
   goToProductDetail(barcode: string): void {

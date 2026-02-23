@@ -12,9 +12,11 @@ import {
 export class StorageService {
   private readonly _products = signal<Product[]>(this.loadProducts());
   private readonly _brands = signal<string[]>(this.loadBrands());
+  private readonly _selectedBrand = signal<string>(this.loadSelectedBrand());
 
   readonly products = this._products.asReadonly();
   readonly brands = this._brands.asReadonly();
+  readonly selectedBrand = this._selectedBrand.asReadonly();
 
   // --- localStorage I/O ---
 
@@ -44,6 +46,20 @@ export class StorageService {
   private persistBrands(brands: string[]): void {
     localStorage.setItem(STORAGE_KEYS.BRANDS, JSON.stringify(brands));
     this._brands.set(brands);
+  }
+
+  private loadSelectedBrand(): string {
+    return localStorage.getItem(STORAGE_KEYS.SELECTED_BRAND) ?? '';
+  }
+
+  setSelectedBrand(brand: string): void {
+    localStorage.setItem(STORAGE_KEYS.SELECTED_BRAND, brand);
+    this._selectedBrand.set(brand);
+  }
+
+  clearSelectedBrand(): void {
+    localStorage.removeItem(STORAGE_KEYS.SELECTED_BRAND);
+    this._selectedBrand.set('');
   }
 
   // --- Product CRUD ---
@@ -233,7 +249,9 @@ export class StorageService {
   clearAll(): void {
     localStorage.removeItem(STORAGE_KEYS.PRODUCTS);
     localStorage.removeItem(STORAGE_KEYS.BRANDS);
+    localStorage.removeItem(STORAGE_KEYS.SELECTED_BRAND);
     this._products.set([]);
     this._brands.set([]);
+    this._selectedBrand.set('');
   }
 }

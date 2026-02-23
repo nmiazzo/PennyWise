@@ -40,6 +40,7 @@ export class BrandAutocomplete implements ControlValueAccessor, OnInit {
   private storage = inject(StorageService);
 
   readonly label = input<string>('Supermarket');
+  readonly initialValue = input<string>('');
   readonly brandSelected = output<string>();
   readonly searchControl = new FormControl('');
   readonly filteredBrands = signal<string[]>([]);
@@ -48,6 +49,11 @@ export class BrandAutocomplete implements ControlValueAccessor, OnInit {
   private onTouched: () => void = () => {};
 
   ngOnInit(): void {
+    const initial = this.initialValue();
+    if (initial) {
+      this.searchControl.setValue(initial, { emitEvent: false });
+    }
+
     this.searchControl.valueChanges.subscribe((value) => {
       const search = (value ?? '').toLowerCase();
       const allBrands = this.storage.brands();
@@ -58,6 +64,12 @@ export class BrandAutocomplete implements ControlValueAccessor, OnInit {
       );
       this.onChange(value ?? '');
     });
+  }
+
+  clear(): void {
+    this.searchControl.setValue('', { emitEvent: false });
+    this.onChange('');
+    this.brandSelected.emit('');
   }
 
   writeValue(value: string): void {

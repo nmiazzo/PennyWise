@@ -14,6 +14,12 @@ const LINE_COLORS = [
   '#455a64',
 ];
 
+function toDayTimestamp(ts: number): number {
+  const d = new Date(ts);
+  d.setHours(0, 0, 0, 0);
+  return d.getTime();
+}
+
 @Component({
   selector: 'pw-price-chart',
   imports: [BaseChartDirective],
@@ -25,14 +31,24 @@ export class PriceChart {
 
   readonly chartData = computed<ChartData<'line'>>(() => {
     const sms = this.supermarkets();
-    const allTimestamps = new Set<number>();
+
+    // Group each supermarket's prices by day, keeping the last record per day
+    const smDayMaps: Map<number, number>[] = [];
+    const allDays = new Set<number>();
+
     for (const sm of sms) {
+      const dayMap = new Map<number, number>();
       for (const record of sm.fullPriceHistory) {
-        allTimestamps.add(record.timestamp);
+        const day = toDayTimestamp(record.timestamp);
+        // Later records overwrite earlier ones on the same day
+        dayMap.set(day, record.price);
+        allDays.add(day);
       }
+      smDayMaps.push(dayMap);
     }
-    const sortedTimestamps = Array.from(allTimestamps).sort((a, b) => a - b);
-    const labels = sortedTimestamps.map((ts) =>
+
+    const sortedDays = Array.from(allDays).sort((a, b) => a - b);
+    const labels = sortedDays.map((ts) =>
       new Date(ts).toLocaleDateString('en-GB', {
         day: '2-digit',
         month: 'short',
@@ -40,11 +56,9 @@ export class PriceChart {
     );
 
     const datasets = sms.map((sm, index) => {
-      const priceMap = new Map(
-        sm.fullPriceHistory.map((r) => [r.timestamp, r.price]),
-      );
-      const data = sortedTimestamps.map((ts) => {
-        const cents = priceMap.get(ts);
+      const dayMap = smDayMaps[index];
+      const data = sortedDays.map((day) => {
+        const cents = dayMap.get(day);
         return cents !== undefined ? cents / 100 : null;
       });
 

@@ -25,6 +25,7 @@ export interface PennyWiseDatabase {
 export const STORAGE_KEYS = {
   PRODUCTS: 'pw_products',
   BRANDS: 'pw_brands',
+  SELECTED_BRAND: 'pw_selected_brand',
 } as const;
 
 export const CURRENT_SCHEMA_VERSION = 1;
