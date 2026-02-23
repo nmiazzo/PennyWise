@@ -1,0 +1,38 @@
+.keypad-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+.price-display {
+  font-size: 2.5rem;
+  font-weight: 500;
+  text-align: center;
+  padding: 16px;
+  width: 100%;
+  background: var(--mat-sys-surface-container);
+  border-radius: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.keypad-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  width: 100%;
+}
+
+.keypad-btn {
+  height: 56px;
+  font-size: 1.25rem;
+  border-radius: 12px !important;
+}
+
+.action-btn {
+  background-color: var(--mat-sys-secondary-container) !important;
+  color: var(--mat-sys-on-secondary-container) !important;
+}

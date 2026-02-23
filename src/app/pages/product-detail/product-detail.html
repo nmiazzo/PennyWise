@@ -1,0 +1,88 @@
+@if (product(); as product) {
+  <div class="detail-page page-content">
+    <h2>{{ product.name }}</h2>
+    <p class="barcode-label">{{ product.barcode }}</p>
+
+    <div class="price-badges">
+      @if (cheapestFull(); as cf) {
+        <div class="badge full-badge">
+          <span class="badge-label">Best Full Price</span>
+          <span class="badge-price">
+            {{ formatCentsToEuro(cf.price.price) }}
+          </span>
+          <span class="badge-brand">@ {{ cf.brand }}</span>
+        </div>
+      }
+      @if (cheapestDiscounted(); as cd) {
+        <div class="badge discount-badge">
+          <span class="badge-label">Best Deal</span>
+          <span class="badge-price">
+            {{ formatCentsToEuro(cd.price.price) }}
+          </span>
+          <span class="badge-brand">@ {{ cd.brand }}</span>
+        </div>
+      }
+    </div>
+
+    <mat-divider />
+
+    <h3>Prices by Supermarket</h3>
+    @for (sm of sortedSupermarkets(); track sm.brand) {
+      <div
+        class="sm-entry"
+        [class.highlighted]="
+          highlightedBrand() &&
+          sm.brand.toLowerCase() === highlightedBrand().toLowerCase()
+        "
+      >
+        <div class="sm-header">
+          <span class="sm-brand">{{ sm.brand }}</span>
+          <div class="sm-prices">
+            @if (getCurrentFullPrice(sm); as fp) {
+              <span class="full-price">{{ formatCentsToEuro(fp.price) }}</span>
+            }
+            @if (sm.discountedPrice) {
+              <span class="discounted-price">
+                {{ formatCentsToEuro(sm.discountedPrice.price) }}
+              </span>
+            }
+          </div>
+        </div>
+        <div class="sm-actions">
+          <button mat-icon-button (click)="updatePrice(sm.brand)" aria-label="Edit price">
+            <mat-icon>edit</mat-icon>
+          </button>
+          @if (sm.discountedPrice) {
+            <button
+              mat-icon-button
+              (click)="removeDiscount(sm.brand)"
+              aria-label="Remove discount"
+            >
+              <mat-icon>remove_shopping_cart</mat-icon>
+            </button>
+          }
+        </div>
+      </div>
+    }
+
+    <button
+      mat-stroked-button
+      class="add-sm-btn"
+      (click)="addNewSupermarketPrice()"
+    >
+      <mat-icon>add</mat-icon>
+      Add Supermarket
+    </button>
+
+    <mat-divider />
+
+    @if (product.supermarkets.length > 0) {
+      <h3>Price History</h3>
+      <pw-price-chart [supermarkets]="product.supermarkets" />
+    }
+  </div>
+} @else {
+  <div class="page-content">
+    <p>Product not found.</p>
+  </div>
+}

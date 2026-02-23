@@ -1,0 +1,17 @@
+<mat-form-field appearance="outline" class="brand-field">
+  <mat-label>{{ label() }}</mat-label>
+  <input
+    matInput
+    [formControl]="searchControl"
+    [matAutocomplete]="auto"
+    (blur)="onBlur()"
+  />
+  <mat-autocomplete
+    #auto="matAutocomplete"
+    (optionSelected)="onOptionSelected($event.option.value)"
+  >
+    @for (brand of filteredBrands(); track brand) {
+      <mat-option [value]="brand">{{ brand }}</mat-option>
+    }
+  </mat-autocomplete>
+</mat-form-field>

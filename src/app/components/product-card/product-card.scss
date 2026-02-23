@@ -1,0 +1,32 @@
+.product-card {
+  cursor: pointer;
+  margin-bottom: 8px;
+}
+
+.price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 4px 0;
+}
+
+.label {
+  font-size: 0.875rem;
+  color: var(--mat-sys-on-surface-variant);
+}
+
+.full-price {
+  font-weight: 500;
+  color: var(--mat-sys-primary);
+}
+
+.discounted-price {
+  font-weight: 500;
+  color: var(--mat-sys-error);
+}
+
+.supermarket-count {
+  font-size: 0.75rem;
+  color: var(--mat-sys-on-surface-variant);
+  margin-top: 8px;
+}

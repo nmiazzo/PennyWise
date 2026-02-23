@@ -1,0 +1,25 @@
+<mat-card
+  class="product-card"
+  [routerLink]="['/product', product().barcode]"
+>
+  <mat-card-header>
+    <mat-card-title>{{ product().name }}</mat-card-title>
+    <mat-card-subtitle>{{ product().barcode }}</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="price-row">
+      <span class="label">Best price:</span>
+      <span class="price full-price">{{ cheapestFull() }}</span>
+    </div>
+    @if (cheapestDiscounted(); as discounted) {
+      <div class="price-row">
+        <span class="label">Best deal:</span>
+        <span class="price discounted-price">{{ discounted }}</span>
+      </div>
+    }
+    <div class="supermarket-count">
+      {{ supermarketCount() }} supermarket{{ supermarketCount() === 1 ? '' : 's' }}
+    </div>
+  </mat-card-content>
+</mat-card>

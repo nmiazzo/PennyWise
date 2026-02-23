@@ -1,0 +1,65 @@
+<div class="settings-page page-content">
+  <h2>Settings</h2>
+
+  <div class="stats-section">
+    <div class="stat">
+      <span class="stat-value">{{ productCount }}</span>
+      <span class="stat-label">Products</span>
+    </div>
+    <div class="stat">
+      <span class="stat-value">{{ brandCount }}</span>
+      <span class="stat-label">Supermarkets</span>
+    </div>
+  </div>
+
+  <mat-divider />
+
+  <section class="settings-section">
+    <h3>Export Data</h3>
+    <p>Download your entire database as a JSON file.</p>
+    <button mat-flat-button (click)="exportDatabase()">
+      <mat-icon>download</mat-icon>
+      Export as JSON
+    </button>
+  </section>
+
+  <mat-divider />
+
+  <section class="settings-section">
+    <h3>Import Data</h3>
+    <p>
+      Import a PennyWise JSON backup. Existing data will be merged (not
+      overwritten).
+    </p>
+    <button
+      mat-stroked-button
+      (click)="triggerImport()"
+      [disabled]="importing()"
+    >
+      <mat-icon>upload</mat-icon>
+      {{ importing() ? 'Importing...' : 'Import JSON File' }}
+    </button>
+
+    <input
+      #fileInput
+      type="file"
+      accept=".json,application/json"
+      (change)="onFileSelected($event)"
+      style="display: none"
+    />
+
+    @if (importResult(); as result) {
+      <p class="import-result">{{ result }}</p>
+    }
+  </section>
+
+  <mat-divider />
+
+  <section class="settings-section danger-zone">
+    <h3>Danger Zone</h3>
+    <button mat-flat-button color="warn" (click)="clearAllData()">
+      <mat-icon>delete_forever</mat-icon>
+      Clear All Data
+    </button>
+  </section>
+</div>

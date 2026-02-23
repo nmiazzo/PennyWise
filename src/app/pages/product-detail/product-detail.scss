@@ -1,0 +1,102 @@
+.detail-page {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.barcode-label {
+  font-family: monospace;
+  color: var(--mat-sys-on-surface-variant);
+  margin-bottom: 16px;
+}
+
+.price-badges {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.badge {
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  border-radius: 12px;
+
+  .badge-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .badge-price {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  .badge-brand {
+    font-size: 0.875rem;
+  }
+}
+
+.full-badge {
+  background: var(--mat-sys-primary-container);
+  color: var(--mat-sys-on-primary-container);
+}
+
+.discount-badge {
+  background: var(--mat-sys-tertiary-container);
+  color: var(--mat-sys-on-tertiary-container);
+}
+
+.sm-entry {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  margin: 4px 0;
+  border-radius: 8px;
+  background: var(--mat-sys-surface-container-low);
+
+  &.highlighted {
+    background: var(--mat-sys-secondary-container);
+    border-left: 4px solid var(--mat-sys-primary);
+  }
+}
+
+.sm-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sm-brand {
+  font-weight: 500;
+}
+
+.sm-prices {
+  display: flex;
+  gap: 12px;
+}
+
+.full-price {
+  color: var(--mat-sys-primary);
+  font-weight: 500;
+}
+
+.discounted-price {
+  color: var(--mat-sys-error);
+  font-weight: 500;
+}
+
+.sm-actions {
+  display: flex;
+}
+
+.add-sm-btn {
+  width: 100%;
+  margin: 16px 0;
+}
+
+mat-divider {
+  margin: 16px 0;
+}

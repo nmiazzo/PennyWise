@@ -1,0 +1,44 @@
+<div class="keypad-container">
+  <div class="price-display" aria-live="polite">
+    {{ displayValue() }}
+  </div>
+
+  <div class="keypad-grid">
+    @for (digit of [1, 2, 3, 4, 5, 6, 7, 8, 9]; track digit) {
+      <button
+        mat-flat-button
+        class="keypad-btn digit-btn"
+        (click)="pressDigit(digit)"
+        type="button"
+      >
+        {{ digit }}
+      </button>
+    }
+    <button
+      mat-flat-button
+      class="keypad-btn action-btn"
+      (click)="pressClear()"
+      type="button"
+      aria-label="Clear"
+    >
+      C
+    </button>
+    <button
+      mat-flat-button
+      class="keypad-btn digit-btn"
+      (click)="pressDigit(0)"
+      type="button"
+    >
+      0
+    </button>
+    <button
+      mat-flat-button
+      class="keypad-btn action-btn"
+      (click)="pressBackspace()"
+      type="button"
+      aria-label="Backspace"
+    >
+      <mat-icon>backspace</mat-icon>
+    </button>
+  </div>
+</div>

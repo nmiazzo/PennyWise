@@ -1,0 +1,51 @@
+<div class="form-page page-content">
+  <h2>{{ isNewProduct() ? 'New Product' : 'Update Price' }}</h2>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Barcode</mat-label>
+    <input matInput [value]="barcode()" readonly />
+  </mat-form-field>
+
+  @if (isNewProduct()) {
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Product Name (optional)</mat-label>
+      <input
+        matInput
+        [value]="productName()"
+        (input)="productName.set($any($event.target).value)"
+        placeholder="e.g., Whole Milk 1L"
+      />
+    </mat-form-field>
+  } @else {
+    <p class="product-name-display">{{ productName() }}</p>
+  }
+
+  <pw-brand-autocomplete
+    label="Supermarket"
+    (brandSelected)="onBrandChanged($event)"
+  />
+
+  <mat-slide-toggle
+    [checked]="isDiscounted()"
+    (change)="isDiscounted.set($event.checked)"
+    class="discount-toggle"
+  >
+    This is a sale/discounted price
+  </mat-slide-toggle>
+
+  <pw-pos-keypad (valueChanged)="onPriceChanged($event)" />
+
+  <div class="form-actions">
+    <button
+      mat-flat-button
+      color="primary"
+      (click)="save()"
+      class="full-width"
+    >
+      {{ isNewProduct() ? 'Add Product' : 'Save Price' }}
+    </button>
+    <button mat-stroked-button (click)="cancel()" class="full-width">
+      Cancel
+    </button>
+  </div>
+</div>

@@ -1,0 +1,86 @@
+<div class="scan-page">
+  <div class="brand-selector page-content">
+    <pw-brand-autocomplete
+      label="Shopping at..."
+      (brandSelected)="onBrandPreSelected($event)"
+    />
+  </div>
+
+  <div class="scanner-viewport" [class.hidden]="scannedProduct() !== null">
+    <div #scannerTarget class="scanner-target"></div>
+    @if (scannerError(); as error) {
+      <div class="scanner-error">
+        <mat-icon>videocam_off</mat-icon>
+        <p>{{ error }}</p>
+        <button mat-flat-button (click)="startScanning()">Retry</button>
+      </div>
+    }
+  </div>
+
+  @if (scannedProduct(); as product) {
+    <div class="scan-result page-content">
+      <h2>{{ product.name }}</h2>
+      <p class="barcode-label">{{ product.barcode }}</p>
+
+      @if (getCheapestFullPrice(product); as cheapest) {
+        <div class="cheapest-badge">
+          <span class="cheapest-label">Cheapest:</span>
+          <span class="cheapest-price">
+            {{ formatCentsToEuro(cheapest.price.price) }}
+          </span>
+          <span class="cheapest-brand">@ {{ cheapest.brand }}</span>
+        </div>
+      }
+
+      <div class="prices-list">
+        @for (
+          sm of sortSupermarketsCheapestFirst(product.supermarkets);
+          track sm.brand
+        ) {
+          <div
+            class="price-entry"
+            [class.highlighted]="
+              selectedBrand() &&
+              sm.brand.toLowerCase() === selectedBrand().toLowerCase()
+            "
+          >
+            <span class="brand-name">{{ sm.brand }}</span>
+            <div class="prices">
+              @if (getCurrentFullPrice(sm); as fullPrice) {
+                <span class="full-price">
+                  {{ formatCentsToEuro(fullPrice.price) }}
+                </span>
+              }
+              @if (sm.discountedPrice) {
+                <span class="discounted-price">
+                  {{ formatCentsToEuro(sm.discountedPrice.price) }}
+                  <small>(sale)</small>
+                </span>
+              }
+            </div>
+          </div>
+        }
+      </div>
+
+      <div class="actions">
+        <button
+          mat-flat-button
+          color="primary"
+          (click)="goToProductDetail(product.barcode)"
+        >
+          View Details
+        </button>
+        <button
+          mat-stroked-button
+          (click)="goToUpdatePrice(product.barcode)"
+        >
+          Update Price
+        </button>
+        <button mat-stroked-button (click)="resumeScanning()">
+          <mat-icon>qr_code_scanner</mat-icon>
+          Scan Again
+        </button>
+      </div>
+    </div>
+  }
+</div>
