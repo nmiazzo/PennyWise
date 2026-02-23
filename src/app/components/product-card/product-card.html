@@ -12,10 +12,15 @@
       <span class="label">Best price:</span>
       <span class="price full-price">{{ cheapestFull() }}</span>
     </div>
-    @if (cheapestDiscounted(); as discounted) {
+    @if (cheapestDiscounted(); as deal) {
       <div class="price-row">
         <span class="label">Best deal:</span>
-        <span class="price discounted-price">{{ discounted }}</span>
+        <span class="price discounted-price">
+          @if (deal.originalText) {
+            <span class="original-price">{{ deal.originalText }}</span>
+          }
+          {{ deal.discountText }}
+        </span>
       </div>
     }
     <div class="supermarket-count">

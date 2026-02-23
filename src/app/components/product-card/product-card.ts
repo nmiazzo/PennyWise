@@ -5,6 +5,7 @@ import {
   Product,
   getCheapestFullPrice,
   getCheapestDiscountedPrice,
+  getCurrentFullPrice,
   formatCentsToEuro,
 } from '../../models/product.model';
 
@@ -26,9 +27,12 @@ export class ProductCard {
 
   readonly cheapestDiscounted = computed(() => {
     const result = getCheapestDiscountedPrice(this.product());
-    return result
-      ? `${formatCentsToEuro(result.price.price)} @ ${result.brand}`
-      : null;
+    if (!result) return null;
+    const discountText = `${formatCentsToEuro(result.price.price)} @ ${result.brand}`;
+    const sm = this.product().supermarkets.find((s) => s.brand === result.brand);
+    const fullPrice = sm ? getCurrentFullPrice(sm) : null;
+    const originalText = fullPrice ? formatCentsToEuro(fullPrice.price) : null;
+    return { discountText, originalText };
   });
 
   readonly supermarketCount = computed(

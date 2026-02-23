@@ -25,6 +25,14 @@
   color: var(--mat-sys-error);
 }
 
+.original-price {
+  text-decoration: line-through;
+  color: var(--mat-sys-on-surface-variant);
+  font-weight: 400;
+  font-size: 0.85em;
+  margin-right: 4px;
+}
+
 .supermarket-count {
   font-size: 0.75rem;
   color: var(--mat-sys-on-surface-variant);
