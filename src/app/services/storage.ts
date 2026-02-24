@@ -85,6 +85,13 @@ export class StorageService {
     );
   }
 
+  updateProductName(barcode: string, name: string): void {
+    const product = this.getProduct(barcode);
+    if (!product) return;
+    product.name = name.trim() || barcode;
+    this.saveProduct(product);
+  }
+
   // --- Brand management ---
 
   addBrand(brand: string): void {

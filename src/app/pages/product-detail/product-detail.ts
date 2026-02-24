@@ -1,8 +1,11 @@
 import { Component, inject, signal, computed, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { StorageService } from '../../services/storage';
 import { PriceChart } from '../../components/price-chart/price-chart';
@@ -18,9 +21,12 @@ import {
 @Component({
   selector: 'pw-product-detail',
   imports: [
+    FormsModule,
     MatButtonModule,
     MatIconModule,
     MatDividerModule,
+    MatFormFieldModule,
+    MatInputModule,
     MatSnackBarModule,
     PriceChart,
   ],
@@ -35,6 +41,8 @@ export class ProductDetail implements OnInit {
 
   readonly barcode = signal<string>('');
   readonly highlightedBrand = signal<string>('');
+  readonly editingName = signal(false);
+  readonly editNameValue = signal('');
 
   readonly product = computed<Product | null>(() => {
     const bc = this.barcode();
@@ -65,6 +73,24 @@ export class ProductDetail implements OnInit {
     this.highlightedBrand.set(
       this.route.snapshot.queryParamMap.get('brand') ?? '',
     );
+  }
+
+  startEditName(): void {
+    this.editNameValue.set(this.product()?.name ?? '');
+    this.editingName.set(true);
+  }
+
+  saveName(): void {
+    const name = this.editNameValue().trim();
+    if (name) {
+      this.storage.updateProductName(this.barcode(), name);
+      this.snackBar.open('Name updated', 'OK', { duration: 2000 });
+    }
+    this.editingName.set(false);
+  }
+
+  cancelEditName(): void {
+    this.editingName.set(false);
   }
 
   addNewSupermarketPrice(): void {

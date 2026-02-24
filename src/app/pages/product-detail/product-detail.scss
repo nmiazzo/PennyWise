@@ -3,6 +3,22 @@
   margin: 0 auto;
 }
 
+.name-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  h2 {
+    margin: 0;
+    flex: 1;
+  }
+}
+
+.name-edit-field {
+  width: 100%;
+  margin-top: 8px;
+}
+
 .barcode-label {
   font-family: monospace;
   color: var(--mat-sys-on-surface-variant);

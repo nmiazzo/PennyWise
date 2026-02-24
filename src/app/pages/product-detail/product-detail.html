@@ -1,6 +1,30 @@
 @if (product(); as product) {
   <div class="detail-page page-content">
-    <h2>{{ product.name }}</h2>
+    @if (editingName()) {
+      <mat-form-field appearance="outline" class="name-edit-field">
+        <mat-label>Product name</mat-label>
+        <input
+          matInput
+          [ngModel]="editNameValue()"
+          (ngModelChange)="editNameValue.set($event)"
+          (keydown.enter)="saveName()"
+          (keydown.escape)="cancelEditName()"
+          (blur)="saveName()"
+          cdkFocusInitial
+        />
+      </mat-form-field>
+    } @else {
+      <div class="name-row">
+        <h2>{{ product.name }}</h2>
+        <button
+          mat-icon-button
+          (click)="startEditName()"
+          aria-label="Edit product name"
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+      </div>
+    }
     <p class="barcode-label">{{ product.barcode }}</p>
 
     <div class="price-badges">
