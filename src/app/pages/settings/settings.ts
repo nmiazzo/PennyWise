@@ -3,6 +3,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { StorageService } from '../../services/storage';
 import { PennyWiseDatabase } from '../../models/product.model';
 
@@ -13,6 +14,7 @@ import { PennyWiseDatabase } from '../../models/product.model';
     MatIconModule,
     MatSnackBarModule,
     MatDividerModule,
+    MatSlideToggleModule,
   ],
   templateUrl: './settings.html',
   styleUrl: './settings.scss',
@@ -32,6 +34,14 @@ export class Settings {
 
   get brandCount(): number {
     return this.storage.brands().length;
+  }
+
+  get forceEan13(): boolean {
+    return this.storage.forceEan13();
+  }
+
+  onForceEan13Change(checked: boolean): void {
+    this.storage.setForceEan13(checked);
   }
 
   exportDatabase(): void {

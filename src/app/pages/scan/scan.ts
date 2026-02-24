@@ -47,6 +47,7 @@ export class Scan implements AfterViewInit, OnDestroy {
   readonly scannerActive = signal<boolean>(false);
   readonly scannerError = signal<string | null>(null);
   readonly scannedProduct = signal<Product | null>(null);
+  readonly nonEan13Prompt = signal<string | null>(null);
 
   private scanSubscription: Subscription | null = null;
 
@@ -68,6 +69,7 @@ export class Scan implements AfterViewInit, OnDestroy {
     try {
       this.scannerError.set(null);
       this.scannedProduct.set(null);
+      this.nonEan13Prompt.set(null);
 
       await this.scanner.startScanner(this.scannerTarget.nativeElement);
       this.scannerActive.set(true);
@@ -86,8 +88,39 @@ export class Scan implements AfterViewInit, OnDestroy {
   }
 
   private async handleBarcodeScan(barcode: string): Promise<void> {
-    await this.scanner.stopScanner();
-    this.scannerActive.set(false);
+    if (barcode.length !== 13) {
+      if (this.storage.forceEan13()) {
+        // Auto-skip: keep scanning without prompting
+        return;
+      }
+      // Pause scanner and prompt the user
+      await this.scanner.stopScanner();
+      this.scannerActive.set(false);
+      this.nonEan13Prompt.set(barcode);
+      return;
+    }
+
+    await this.processBarcode(barcode);
+  }
+
+  acceptNonEan13(): void {
+    const barcode = this.nonEan13Prompt();
+    if (barcode) {
+      this.nonEan13Prompt.set(null);
+      this.processBarcode(barcode);
+    }
+  }
+
+  async rejectNonEan13(): Promise<void> {
+    this.nonEan13Prompt.set(null);
+    await this.startScanning();
+  }
+
+  private async processBarcode(barcode: string): Promise<void> {
+    if (this.scannerActive()) {
+      await this.scanner.stopScanner();
+      this.scannerActive.set(false);
+    }
 
     const existingProduct = this.storage.getProduct(barcode);
 

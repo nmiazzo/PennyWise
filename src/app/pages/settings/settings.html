@@ -15,6 +15,21 @@
   <mat-divider />
 
   <section class="settings-section">
+    <h3>Scanner</h3>
+    <mat-slide-toggle
+      [checked]="forceEan13"
+      (change)="onForceEan13Change($event.checked)"
+    >
+      Accept only EAN-13 barcodes (13 digits)
+    </mat-slide-toggle>
+    <p class="toggle-hint">
+      When enabled, non-EAN-13 barcodes are automatically ignored. When disabled, you'll be asked whether to accept them.
+    </p>
+  </section>
+
+  <mat-divider />
+
+  <section class="settings-section">
     <h3>Export Data</h3>
     <p>Download your entire database as a JSON file.</p>
     <button mat-flat-button (click)="exportDatabase()">

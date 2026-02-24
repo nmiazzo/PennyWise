@@ -20,7 +20,7 @@
     </div>
   </div>
 
-  <div class="scanner-viewport" [class.hidden]="scannedProduct() !== null">
+  <div class="scanner-viewport" [class.hidden]="scannedProduct() !== null || nonEan13Prompt() !== null">
     <div #scannerTarget class="scanner-target"></div>
     @if (scannerError(); as error) {
       <div class="scanner-error">
@@ -30,6 +30,23 @@
       </div>
     }
   </div>
+
+  @if (nonEan13Prompt(); as barcode) {
+    <div class="ean13-prompt page-content">
+      <mat-icon class="prompt-icon">warning</mat-icon>
+      <h3>Non-standard barcode detected</h3>
+      <p class="barcode-label">{{ barcode }}</p>
+      <p>This barcode is {{ barcode.length }} digits long instead of the standard 13 (EAN-13). Do you want to use it anyway?</p>
+      <div class="prompt-actions">
+        <button mat-flat-button color="primary" (click)="acceptNonEan13()">
+          Use this barcode
+        </button>
+        <button mat-stroked-button (click)="rejectNonEan13()">
+          Keep scanning
+        </button>
+      </div>
+    </div>
+  }
 
   @if (scannedProduct(); as product) {
     <div class="scan-result page-content">

@@ -26,6 +26,7 @@ export const STORAGE_KEYS = {
   PRODUCTS: 'pw_products',
   BRANDS: 'pw_brands',
   SELECTED_BRAND: 'pw_selected_brand',
+  FORCE_EAN13: 'pw_force_ean13',
 } as const;
 
 export const CURRENT_SCHEMA_VERSION = 1;

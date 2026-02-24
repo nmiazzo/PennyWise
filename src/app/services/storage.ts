@@ -13,10 +13,12 @@ export class StorageService {
   private readonly _products = signal<Product[]>(this.loadProducts());
   private readonly _brands = signal<string[]>(this.loadBrands());
   private readonly _selectedBrand = signal<string>(this.loadSelectedBrand());
+  private readonly _forceEan13 = signal<boolean>(this.loadForceEan13());
 
   readonly products = this._products.asReadonly();
   readonly brands = this._brands.asReadonly();
   readonly selectedBrand = this._selectedBrand.asReadonly();
+  readonly forceEan13 = this._forceEan13.asReadonly();
 
   // --- localStorage I/O ---
 
@@ -60,6 +62,15 @@ export class StorageService {
   clearSelectedBrand(): void {
     localStorage.removeItem(STORAGE_KEYS.SELECTED_BRAND);
     this._selectedBrand.set('');
+  }
+
+  private loadForceEan13(): boolean {
+    return localStorage.getItem(STORAGE_KEYS.FORCE_EAN13) === 'true';
+  }
+
+  setForceEan13(value: boolean): void {
+    localStorage.setItem(STORAGE_KEYS.FORCE_EAN13, String(value));
+    this._forceEan13.set(value);
   }
 
   // --- Product CRUD ---
@@ -257,8 +268,10 @@ export class StorageService {
     localStorage.removeItem(STORAGE_KEYS.PRODUCTS);
     localStorage.removeItem(STORAGE_KEYS.BRANDS);
     localStorage.removeItem(STORAGE_KEYS.SELECTED_BRAND);
+    localStorage.removeItem(STORAGE_KEYS.FORCE_EAN13);
     this._products.set([]);
     this._brands.set([]);
     this._selectedBrand.set('');
+    this._forceEan13.set(false);
   }
 }
