@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1771930819681,
+  "timestamp": 1771931050824,
   "index": "/PennyWise/index.html",
   "assetGroups": [
     {
@@ -34,7 +34,7 @@
         "/PennyWise/main-2VSVVNBN.js",
         "/PennyWise/manifest.webmanifest",
         "/PennyWise/material-icons.woff2",
-        "/PennyWise/styles-M74DDI3J.css"
+        "/PennyWise/styles-OPB7VIX4.css"
       ],
       "patterns": []
     },
@@ -100,11 +100,11 @@
     "/PennyWise/icons/icon-512x512.png": "1de182f76f7329dfa8f9fcdd1fdcdd695bea6a99",
     "/PennyWise/icons/icon-72x72.png": "aa88a6096bd973be7f6d7a5489bfa6bc2463f8c4",
     "/PennyWise/icons/icon-96x96.png": "7fb8f59c30ce2ff12c700321a0b39e14b3dc8f95",
-    "/PennyWise/index.html": "e78a9a20c4a13a588e4ef1e06b51b2b8f3662674",
+    "/PennyWise/index.html": "eff4227c7a1e732462571663601a4e062b4ed0c8",
     "/PennyWise/main-2VSVVNBN.js": "72bdf0611853e90715e963fb4b25fd0ee7ef7b58",
     "/PennyWise/manifest.webmanifest": "e4b428ae09f01193338a1240899e5b7d64274ac5",
     "/PennyWise/material-icons.woff2": "0bc0c675480d94ec7e8609dda6227f88c5d08d2c",
-    "/PennyWise/styles-M74DDI3J.css": "b2ce437336d39e2f72ec8f4118d499b8943a574b"
+    "/PennyWise/styles-OPB7VIX4.css": "b1b8d0863cb139ebc199c2c015c17140042fd98d"
   },
   "navigationUrls": [
     {
