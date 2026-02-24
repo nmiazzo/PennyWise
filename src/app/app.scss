@@ -19,11 +19,11 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  height: 56px;
+  min-height: 56px;
   border-top: 1px solid var(--mat-sys-outline-variant);
   background: var(--mat-sys-surface);
   flex-shrink: 0;
-  padding-bottom: env(safe-area-inset-bottom, 0px);
+  padding: 4px 0 calc(4px + env(safe-area-inset-bottom, 0px));
 }
 
 .nav-item {
