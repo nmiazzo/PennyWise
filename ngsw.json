@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1773052743172,
+  "timestamp": 1773053096698,
   "index": "/PennyWise/index.html",
   "assetGroups": [
     {
@@ -49,14 +49,11 @@
         "ignoreVary": true
       },
       "urls": [
-        "/PennyWise/icons/icon-128x128.png",
-        "/PennyWise/icons/icon-144x144.png",
-        "/PennyWise/icons/icon-152x152.png",
-        "/PennyWise/icons/icon-192x192.png",
-        "/PennyWise/icons/icon-384x384.png",
-        "/PennyWise/icons/icon-512x512.png",
-        "/PennyWise/icons/icon-72x72.png",
-        "/PennyWise/icons/icon-96x96.png"
+        "/PennyWise/icons/apple-touch-icon.png",
+        "/PennyWise/icons/icon-192-maskable.png",
+        "/PennyWise/icons/icon-192.png",
+        "/PennyWise/icons/icon-512-maskable.png",
+        "/PennyWise/icons/icon-512.png"
       ],
       "patterns": []
     },
@@ -97,18 +94,15 @@
     "/PennyWise/chunk-XNLNMLGR.js": "86c46ef08ed9e5db4f64b040bd4abdfa197fd250",
     "/PennyWise/chunk-XVFZXXWY.js": "4d0075a48369c2a9e8d5dd491cf9709b84cccd7a",
     "/PennyWise/chunk-Y6X46H6T.js": "6f62fca030a91e0bbb3a412e345d1066668cb2a0",
-    "/PennyWise/favicon.ico": "9c39f434fe1261f68c5e3eefdf734630d99c5670",
-    "/PennyWise/icons/icon-128x128.png": "f912963bdc6d5a38d8f1dd0afbaab2ce8d657acb",
-    "/PennyWise/icons/icon-144x144.png": "b155fd5f2fd5d2ea7760721063003c4cd95fd783",
-    "/PennyWise/icons/icon-152x152.png": "eae6e0f0c8afb8aaae339e2a569b43e9238e5e6c",
-    "/PennyWise/icons/icon-192x192.png": "15c4180454633880d98674aa7394656196c91584",
-    "/PennyWise/icons/icon-384x384.png": "94a915751ef6c9282df9aea405ad679230631814",
-    "/PennyWise/icons/icon-512x512.png": "1de182f76f7329dfa8f9fcdd1fdcdd695bea6a99",
-    "/PennyWise/icons/icon-72x72.png": "aa88a6096bd973be7f6d7a5489bfa6bc2463f8c4",
-    "/PennyWise/icons/icon-96x96.png": "7fb8f59c30ce2ff12c700321a0b39e14b3dc8f95",
-    "/PennyWise/index.html": "63b5c1841bda4066f0a40e58ddb634272aaec68b",
+    "/PennyWise/favicon.ico": "4bb16ec7b0f784696c4e71f5d4c3fc348416fc7f",
+    "/PennyWise/icons/apple-touch-icon.png": "719346905b83d6c7e28f5ee7a08b1e566e26c0fc",
+    "/PennyWise/icons/icon-192-maskable.png": "49706a835ac7e40686aede15caf8e487f417b1b5",
+    "/PennyWise/icons/icon-192.png": "c88062987ae7ace9c65904b50b5ed74ff78429a2",
+    "/PennyWise/icons/icon-512-maskable.png": "d1f378f07eb3a4d67a28bcce7ae8a5f98de280ab",
+    "/PennyWise/icons/icon-512.png": "d469419bfa9e6724d9a4ca794318fc4b36afe887",
+    "/PennyWise/index.html": "e01d4005d6d364ebb65474fcfd16b575c0c5bc68",
     "/PennyWise/main-IVSVZKU5.js": "fd7c6dd56bd962932e518c317462b40cc0284c65",
-    "/PennyWise/manifest.webmanifest": "e4b428ae09f01193338a1240899e5b7d64274ac5",
+    "/PennyWise/manifest.webmanifest": "a50d5fd43cb73dbed02e93938b2e137618161a43",
     "/PennyWise/material-icons.woff2": "0bc0c675480d94ec7e8609dda6227f88c5d08d2c",
     "/PennyWise/styles-OPB7VIX4.css": "b1b8d0863cb139ebc199c2c015c17140042fd98d"
   },
