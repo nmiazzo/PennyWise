@@ -27,6 +27,68 @@
     }
     <p class="barcode-label">{{ product.barcode }}</p>
 
+    @if (isManual()) {
+      <div class="manual-barcode-banner">
+        <mat-icon>warning</mat-icon>
+        <span>Questo prodotto non ha un codice a barre reale</span>
+      </div>
+
+      @if (nameConflict(); as conflict) {
+        <div class="name-conflict-dialog">
+          <p><strong>Il barcode è già associato a un prodotto con un nome diverso.</strong></p>
+          <p>Quale nome vuoi mantenere?</p>
+          <div class="conflict-actions">
+            <button mat-flat-button color="primary" (click)="resolveNameConflict(conflict.oldName)">
+              {{ conflict.oldName }}
+            </button>
+            <button mat-flat-button (click)="resolveNameConflict(conflict.existingName)">
+              {{ conflict.existingName }}
+            </button>
+            <button mat-stroked-button (click)="cancelNameConflict()">Annulla</button>
+          </div>
+        </div>
+      } @else if (scanningBarcode()) {
+        <div class="barcode-scanner-section">
+          <div #barcodeScannerTarget class="barcode-scanner-target"></div>
+          <div class="barcode-scanner-actions">
+            <button mat-stroked-button (click)="showManualBarcodeInput()">
+              <mat-icon>keyboard</mat-icon>
+              Inserisci a mano
+            </button>
+            <button mat-stroked-button (click)="cancelBarcodeScanner()">Annulla</button>
+          </div>
+        </div>
+      } @else if (manualBarcodeInput()) {
+        <div class="manual-barcode-section">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Codice a barre</mat-label>
+            <input
+              matInput
+              [value]="manualBarcodeValue()"
+              (input)="manualBarcodeValue.set($any($event.target).value)"
+              (keydown.enter)="submitManualBarcode()"
+              placeholder="Inserisci il codice a barre..."
+            />
+          </mat-form-field>
+          <div class="manual-barcode-actions">
+            <button mat-flat-button color="primary" (click)="submitManualBarcode()">Conferma</button>
+            <button mat-stroked-button (click)="cancelManualBarcode()">Annulla</button>
+          </div>
+        </div>
+      } @else {
+        <div class="assign-barcode-actions">
+          <button mat-flat-button color="primary" (click)="startBarcodeScanner()">
+            <mat-icon>qr_code_scanner</mat-icon>
+            Scansiona codice a barre
+          </button>
+          <button mat-stroked-button (click)="showManualBarcodeInput()">
+            <mat-icon>keyboard</mat-icon>
+            Inserisci a mano
+          </button>
+        </div>
+      }
+    }
+
     <div class="price-badges">
       @if (cheapestFull(); as cf) {
         <div class="badge full-badge">

@@ -7,6 +7,7 @@ import {
   getCheapestDiscountedPrice,
   getCurrentFullPrice,
   formatCentsToEuro,
+  isManualBarcode,
 } from '../../models/product.model';
 
 @Component({
@@ -34,6 +35,8 @@ export class ProductCard {
     const originalText = fullPrice ? formatCentsToEuro(fullPrice.price) : null;
     return { discountText, originalText };
   });
+
+  readonly isManual = computed(() => isManualBarcode(this.product().barcode));
 
   readonly supermarketCount = computed(
     () => this.product().supermarkets.length,

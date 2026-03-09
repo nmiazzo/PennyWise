@@ -168,6 +168,10 @@ export class Scan implements AfterViewInit, OnDestroy {
     await this.startScanning();
   }
 
+  goToBulkImport(): void {
+    this.router.navigate(['/bulk-import']);
+  }
+
   private cleanupScanner(): void {
     this.scanSubscription?.unsubscribe();
     this.scanner.stopScanner();

@@ -1,0 +1,74 @@
+.bulk-import-page {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.hint {
+  color: var(--mat-sys-on-surface-variant);
+  margin-bottom: 16px;
+}
+
+.review-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+
+  h2 {
+    margin: 0;
+  }
+}
+
+.item-count {
+  color: var(--mat-sys-on-surface-variant);
+  font-size: 0.875rem;
+  margin: 8px 0 16px;
+}
+
+.items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.import-item {
+  padding: 12px;
+  border-radius: 12px;
+  background: var(--mat-sys-surface-container-low);
+}
+
+.item-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+
+  .name-field {
+    flex: 1;
+  }
+}
+
+.item-price-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.price-field {
+  width: 130px;
+}
+
+.full-price-field {
+  margin-top: 8px;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 24px;
+  padding-bottom: 24px;
+}

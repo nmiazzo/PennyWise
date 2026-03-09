@@ -25,6 +25,84 @@
   margin-bottom: 16px;
 }
 
+.manual-barcode-banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  margin-bottom: 16px;
+  border-radius: 12px;
+  background: var(--mat-sys-error-container);
+  color: var(--mat-sys-on-error-container);
+
+  mat-icon {
+    flex-shrink: 0;
+  }
+}
+
+.assign-barcode-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.barcode-scanner-section {
+  margin-bottom: 16px;
+}
+
+.barcode-scanner-target {
+  width: 100%;
+  height: 200px;
+  background: #000;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 8px;
+
+  ::ng-deep video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  ::ng-deep canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.barcode-scanner-actions,
+.manual-barcode-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.manual-barcode-section {
+  margin-bottom: 16px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.name-conflict-dialog {
+  padding: 16px;
+  margin-bottom: 16px;
+  border-radius: 12px;
+  background: var(--mat-sys-error-container);
+  color: var(--mat-sys-on-error-container);
+}
+
+.conflict-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+}
+
 .price-badges {
   display: flex;
   flex-direction: column;

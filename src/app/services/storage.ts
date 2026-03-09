@@ -6,6 +6,7 @@ import {
   PennyWiseDatabase,
   STORAGE_KEYS,
   CURRENT_SCHEMA_VERSION,
+  isManualBarcode,
 } from '../models/product.model';
 
 @Injectable({ providedIn: 'root' })
@@ -168,6 +169,84 @@ export class StorageService {
       smEntry.discountedPrice = null;
       this.saveProduct(product);
     }
+  }
+
+  /**
+   * Reassign a manual barcode to a real one.
+   * If the real barcode already exists, merge supermarket data.
+   * Returns 'name-conflict' with both names when products have different names.
+   */
+  reassignBarcode(
+    oldBarcode: string,
+    newBarcode: string,
+    keepName?: string,
+  ): { status: 'ok' | 'name-conflict'; oldName?: string; existingName?: string } {
+    const manualProduct = this.getProduct(oldBarcode);
+    if (!manualProduct) return { status: 'ok' };
+
+    const existingProduct = this.getProduct(newBarcode);
+
+    if (!existingProduct) {
+      // Simply update the barcode
+      this.deleteProduct(oldBarcode);
+      manualProduct.barcode = newBarcode;
+      this.saveProduct(manualProduct);
+      return { status: 'ok' };
+    }
+
+    // Product with this barcode already exists — check names
+    if (
+      !keepName &&
+      manualProduct.name !== existingProduct.name &&
+      manualProduct.name !== oldBarcode
+    ) {
+      return {
+        status: 'name-conflict',
+        oldName: manualProduct.name,
+        existingName: existingProduct.name,
+      };
+    }
+
+    // Merge supermarket data from manualProduct into existingProduct
+    for (const importedSm of manualProduct.supermarkets) {
+      const existingSm = existingProduct.supermarkets.find(
+        (s) => s.brand.toLowerCase() === importedSm.brand.toLowerCase(),
+      );
+
+      if (!existingSm) {
+        existingProduct.supermarkets.push(importedSm);
+      } else {
+        // Merge full price history by timestamp
+        const existingTimestamps = new Set(
+          existingSm.fullPriceHistory.map((r) => r.timestamp),
+        );
+        for (const record of importedSm.fullPriceHistory) {
+          if (!existingTimestamps.has(record.timestamp)) {
+            existingSm.fullPriceHistory.push(record);
+          }
+        }
+        existingSm.fullPriceHistory.sort((a, b) => a.timestamp - b.timestamp);
+
+        // Keep most recent discounted price
+        if (importedSm.discountedPrice) {
+          if (
+            !existingSm.discountedPrice ||
+            importedSm.discountedPrice.timestamp >
+              existingSm.discountedPrice.timestamp
+          ) {
+            existingSm.discountedPrice = importedSm.discountedPrice;
+          }
+        }
+      }
+    }
+
+    if (keepName) {
+      existingProduct.name = keepName;
+    }
+
+    this.deleteProduct(oldBarcode);
+    this.saveProduct(existingProduct);
+    return { status: 'ok' };
   }
 
   // --- Export ---

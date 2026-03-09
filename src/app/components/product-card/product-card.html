@@ -1,5 +1,6 @@
 <mat-card
   class="product-card"
+  [class.manual-barcode]="isManual()"
   [routerLink]="['/product', product().barcode]"
 >
   <mat-card-header>

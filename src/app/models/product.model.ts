@@ -70,6 +70,10 @@ export function formatCentsToEuro(cents: number): string {
   return `\u20AC${(cents / 100).toFixed(2)}`;
 }
 
+export function isManualBarcode(barcode: string): boolean {
+  return barcode.startsWith('MAN-');
+}
+
 export function sortSupermarketsCheapestFirst(
   supermarkets: SupermarketPriceData[],
 ): SupermarketPriceData[] {

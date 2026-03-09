@@ -14,6 +14,11 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'bulk-import',
+    loadComponent: () =>
+      import('./pages/bulk-import/bulk-import').then((m) => m.BulkImport),
+  },
+  {
     path: 'settings',
     loadComponent: () =>
       import('./pages/settings/settings').then((m) => m.Settings),

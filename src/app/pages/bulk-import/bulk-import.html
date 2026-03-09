@@ -1,0 +1,123 @@
+<div class="bulk-import-page page-content">
+  @if (step() === 'paste') {
+    <h2>Importazione in blocco</h2>
+    <p class="hint">
+      Incolla il testo con nomi e prezzi degli articoli, un articolo per riga.
+    </p>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Testo da importare</mat-label>
+      <textarea
+        matInput
+        [value]="rawText()"
+        (input)="rawText.set($any($event.target).value)"
+        rows="12"
+        placeholder="Pasta Barilla 500g   1.29
+Latte intero 1L   1.49
+Olio EVO 1L   5.99"
+      ></textarea>
+    </mat-form-field>
+
+    <div class="actions">
+      <button
+        mat-flat-button
+        color="primary"
+        (click)="parseText()"
+        class="full-width"
+      >
+        Analizza testo
+      </button>
+      <button mat-stroked-button (click)="goBack()" class="full-width">
+        Annulla
+      </button>
+    </div>
+  }
+
+  @if (step() === 'review') {
+    <div class="review-header">
+      <button mat-icon-button (click)="goBack()" aria-label="Indietro">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <h2>Revisione articoli</h2>
+    </div>
+
+    <pw-brand-autocomplete
+      label="Supermercato"
+      [initialValue]="brand()"
+      (brandSelected)="onBrandChanged($event)"
+    />
+
+    <p class="item-count">{{ items().length }} articoli trovati</p>
+
+    <div class="items-list">
+      @for (item of items(); track $index) {
+        <div class="import-item">
+          <div class="item-header">
+            <mat-form-field appearance="outline" class="name-field">
+              <mat-label>Nome</mat-label>
+              <input
+                matInput
+                [value]="item.name"
+                (input)="updateItemName($index, $any($event.target).value)"
+              />
+            </mat-form-field>
+            <button
+              mat-icon-button
+              color="warn"
+              (click)="removeItem($index)"
+              aria-label="Rimuovi"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+
+          <div class="item-price-row">
+            <mat-form-field appearance="outline" class="price-field">
+              <mat-label>Prezzo (€)</mat-label>
+              <input
+                matInput
+                type="number"
+                step="0.01"
+                min="0"
+                [value]="formatCentsToEuro(item.priceCents)"
+                (change)="updateItemPrice($index, $any($event.target).value)"
+              />
+            </mat-form-field>
+
+            <mat-slide-toggle
+              [checked]="item.isDiscounted"
+              (change)="toggleDiscount($index, $event.checked)"
+            >
+              In offerta
+            </mat-slide-toggle>
+          </div>
+
+          @if (item.isDiscounted) {
+            <mat-form-field appearance="outline" class="price-field full-price-field">
+              <mat-label>Prezzo pieno (€)</mat-label>
+              <input
+                matInput
+                type="number"
+                step="0.01"
+                min="0"
+                [value]="item.fullPriceCents > 0 ? formatCentsToEuro(item.fullPriceCents) : ''"
+                (change)="updateFullPrice($index, $any($event.target).value)"
+              />
+            </mat-form-field>
+          }
+        </div>
+      }
+    </div>
+
+    <div class="actions">
+      <button
+        mat-flat-button
+        color="primary"
+        (click)="save()"
+        class="full-width"
+      >
+        Importa {{ items().length }} articoli
+      </button>
+    </div>
+  }
+</div>
