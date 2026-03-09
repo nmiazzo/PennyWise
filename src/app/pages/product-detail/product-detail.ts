@@ -52,6 +52,7 @@ export class ProductDetail implements OnInit, OnDestroy {
   readonly scanningBarcode = signal(false);
   readonly manualBarcodeInput = signal(false);
   readonly manualBarcodeValue = signal('');
+  readonly nonEan13Prompt = signal<string | null>(null);
   readonly nameConflict = signal<{ oldName: string; existingName: string; newBarcode: string } | null>(null);
 
   private scanSubscription: import('rxjs').Subscription | null = null;
@@ -139,7 +140,7 @@ export class ProductDetail implements OnInit, OnDestroy {
       try {
         await this.scanner.startScanner(this.barcodeScannerTarget.nativeElement);
         this.scanSubscription = this.scanner.barcodeDetected$.subscribe(
-          (result) => this.handleBarcodeAssignment(result.code),
+          (result) => this.handleBarcodeScan(result.code),
         );
       } catch {
         this.snackBar.open('Impossibile avviare la fotocamera', 'OK', { duration: 2000 });
@@ -157,6 +158,7 @@ export class ProductDetail implements OnInit, OnDestroy {
 
   cancelBarcodeScanner(): void {
     this.stopBarcodeScanner();
+    this.nonEan13Prompt.set(null);
   }
 
   showManualBarcodeInput(): void {
@@ -173,6 +175,31 @@ export class ProductDetail implements OnInit, OnDestroy {
   cancelManualBarcode(): void {
     this.manualBarcodeInput.set(false);
     this.manualBarcodeValue.set('');
+  }
+
+  private handleBarcodeScan(barcode: string): void {
+    if (barcode.length !== 13) {
+      if (this.storage.forceEan13()) {
+        return;
+      }
+      this.stopBarcodeScanner();
+      this.nonEan13Prompt.set(barcode);
+      return;
+    }
+    this.handleBarcodeAssignment(barcode);
+  }
+
+  acceptNonEan13Assignment(): void {
+    const barcode = this.nonEan13Prompt();
+    if (barcode) {
+      this.nonEan13Prompt.set(null);
+      this.handleBarcodeAssignment(barcode);
+    }
+  }
+
+  async rejectNonEan13Assignment(): Promise<void> {
+    this.nonEan13Prompt.set(null);
+    await this.startBarcodeScanner();
   }
 
   private handleBarcodeAssignment(newBarcode: string): void {

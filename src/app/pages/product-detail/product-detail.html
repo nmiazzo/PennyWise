@@ -58,6 +58,21 @@
             <button mat-stroked-button (click)="cancelBarcodeScanner()">Annulla</button>
           </div>
         </div>
+      } @else if (nonEan13Prompt(); as promptBarcode) {
+        <div class="ean13-prompt">
+          <mat-icon class="prompt-icon">warning</mat-icon>
+          <h3>Codice a barre non standard</h3>
+          <p class="barcode-label">{{ promptBarcode }}</p>
+          <p>Questo codice ha {{ promptBarcode.length }} cifre invece delle 13 standard (EAN-13). Vuoi usarlo comunque?</p>
+          <div class="prompt-actions">
+            <button mat-flat-button color="primary" (click)="acceptNonEan13Assignment()">
+              Usa questo codice
+            </button>
+            <button mat-stroked-button (click)="rejectNonEan13Assignment()">
+              Continua a scansionare
+            </button>
+          </div>
+        </div>
       } @else if (manualBarcodeInput()) {
         <div class="manual-barcode-section">
           <mat-form-field appearance="outline" class="full-width">
